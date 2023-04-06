@@ -10,7 +10,8 @@ def solution(p: float, x: np.array) -> tuple:
     # Измените код этой функции
     # Это будет вашим решением
     # Не меняйте название функции и её аргументы
+    const = 0.038
     alpha = 1 - p
-    max = x.max()  
-    return (max - ((max - 0.038) * norm.ppf(1 - alpha / 2) / np.sqrt(2*len(x))),
-            max + ((max - 0.038) * norm.ppf(1 - alpha / 2) / np.sqrt(2*len(x))))
+    x -= const
+    return x.mean() - np.sqrt(np.var(x)) * norm.ppf(1 - alpha / 2) / np.sqrt(len(x)) + const, \
+           x.mean() - np.sqrt(np.var(x)) * norm.ppf(alpha / 2) / np.sqrt(len(x)) + const
